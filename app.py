@@ -11,7 +11,7 @@ st.set_page_config(
     page_icon="📊"
 )
 
-# 2. Estilo personalizado (Fondo blanco, letras negras e inversión de colores) 
+# 2. Estilo personalizado (Fondo blanco, letras negras e inversión de colores)
 st.markdown("""
     <style>
     .stApp {
@@ -21,7 +21,7 @@ st.markdown("""
         color: #000000 !important;
     }
     [data-testid="stMetricValue"] {
-        color: #007bff !important; /* Azul FUNDES para resaltar valores */
+        color: #007bff !important;
     }
     [data-testid="stMetricLabel"] {
         color: #000000 !important;
@@ -36,7 +36,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 3. Conexión a Google Sheets 
+# 3. Conexión a Google Sheets
 sheet_id = "1jOgf6WFuJSKiAUpY-8JyU0x_8OGI_8X9Lt6QYF1L7_4"
 sheet_name = "Base%20simulada%20para%20dashboard"
 url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={sheet_name}"
@@ -45,7 +45,7 @@ url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sh
 def load_data():
     df = pd.read_csv(url)
     if 'registration date' in df.columns:
-        df['registration date'] = pd.to_datetime(df['registration date'], dayfirst=True, errors='coerce') [cite: 1]
+        df['registration date'] = pd.to_datetime(df['registration date'], dayfirst=True, errors='coerce')
     return df
 
 try:
@@ -55,18 +55,16 @@ except Exception as e:
     st.stop()
 
 # 4. Sidebar - Logo de FUNDES y Filtros
-# Intentar cargar el logo localmente desde el repositorio
 logo_path = "logo_fundes.png"
 if os.path.exists(logo_path):
     st.sidebar.image(logo_path, width=180)
 else:
-    # Si aún no lo subes, usa este placeholder de FUNDES
+    # Backup: Logo oficial de FUNDES desde la web
     st.sidebar.image("https://fundes.org/wp-content/uploads/2021/04/logo-fundes.png", width=180)
 
 st.sidebar.title("Proyecto Mawahib")
 st.sidebar.header("🔍 Filtros")
 
-# Filtros de fecha y negocio 
 if not df['registration date'].isnull().all():
     min_date = df['registration date'].min().date()
     max_date = df['registration date'].max().date()
@@ -84,20 +82,20 @@ if not df['registration date'].isnull().all() and len(date_range) == 2:
 
 df_filtered = df[mask]
 
-# 5. Cuerpo Principal y Métricas Actualizadas 
+# 5. Cuerpo Principal
 st.title("📊 Mawahib: Monitoring & Analytics Dashboard")
 st.subheader("Control de avance educativo - Micro, Pequeños y Medianos Empresarios")
 
-# KPIs corregidos 
+# KPIs corregidos
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Registered", f"{df_filtered['Registered'].sum()}") [cite: 1]
-col2.metric("Active", f"{df_filtered['Active'].sum()}") [cite: 1]
-col3.metric("Graduate", f"{df_filtered['Graduate'].sum()}") [cite: 1]
-col4.metric("Lessons complete", f"{df_filtered['Number of lessons'].sum():,}") [cite: 1]
+col1.metric("Registered", f"{df_filtered['Registered'].sum()}")
+col2.metric("Active", f"{df_filtered['Active'].sum()}")
+col3.metric("Graduate", f"{df_filtered['Graduate'].sum()}")
+col4.metric("Lessons complete", f"{df_filtered['Number of lessons'].sum():,}")
 
 st.divider()
 
-# Gráficos e indicadores visuales 
+# Gráficos e indicadores visuales
 c1, c2 = st.columns([3, 2])
 with c1:
     st.subheader("📈 Tendencia de Usuarios")
@@ -116,7 +114,6 @@ st.divider()
 
 c3, c4 = st.columns(2)
 with c3:
-    # Nuevo gráfico de distribución Type of Business 
     st.subheader("📊 Distribution by Type of Business")
     biz_data = df_filtered['Type of business'].value_counts().reset_index()
     biz_data.columns = ['Type of business', 'Count']
@@ -132,3 +129,6 @@ with c4:
                      orientation='h', color_discrete_sequence=['#545454'],
                      template="plotly_white")
     st.plotly_chart(fig_edu, use_container_width=True)
+
+with st.expander("📋 Ver tabla de datos completa"):
+    st.dataframe(df_filtered.drop(columns=['Latitud', 'Longitud'], errors='ignore'), use_container_width=True)
