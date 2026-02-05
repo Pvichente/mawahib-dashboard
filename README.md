@@ -1,6 +1,10 @@
 # Mawahib Project: MSME Empowerment Dashboard 📊
 
-## Overview
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)
+![Status](https://img.shields.io/badge/Status-MVP-green.svg
+
+## Overview 📝
 **Mawahib** is a strategic collaboration between **Fundes** and **Coca-Cola** designed to empower Micro, Small, and Medium Enterprises (MSMEs), specifically grocery store owners. Through the **Enably** platform, users access specialized training modules in:
 * Inventory Planning
 * Business Management
@@ -8,13 +12,13 @@
 
 This dashboard provides stakeholders with real-time visibility into user engagement, lesson completion rates, and key performance indicators (KPIs) to support data-driven decision-making.
 
-## Key Features
+## Key Features 🔑
 - **Strategic KPIs:** Monitor total registered users, active participation, and graduation rates.
 - **Learning Funnel:** Visualize the conversion from pre-loaded users to certified graduates.
 - **Geographic Analysis:** Heatmap of user locations to identify regional impacts.
 - **Business Segmentation:** Insights into user demographics, education levels, and business types.
 
-## Tech Stack
+## Tech Stack 💻
 - **Language:** Python
 - **Framework:** Streamlit
 - **Data Manipulation:** Pandas
