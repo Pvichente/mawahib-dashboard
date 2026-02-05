@@ -62,16 +62,16 @@ else:
     # Backup: Logo oficial de FUNDES desde la web
     st.sidebar.image("https://fundes.org/wp-content/uploads/2021/04/logo-fundes.png", width=180)
 
-st.sidebar.title("Proyecto Mawahib")
-st.sidebar.header("🔍 Filtros")
+st.sidebar.title("Mawahib Project")
+st.sidebar.header("🔍 Filters")
 
 if not df['registration date'].isnull().all():
     min_date = df['registration date'].min().date()
     max_date = df['registration date'].max().date()
-    date_range = st.sidebar.date_input("Periodo de registro:", [min_date, max_date])
+    date_range = st.sidebar.date_input("Registration period:", [min_date, max_date])
 
 tipos_negocio = st.sidebar.multiselect(
-    "Giro del Negocio:",
+    "Business Focus::",
     options=sorted(df['Type of business'].unique()),
     default=df['Type of business'].unique()
 )
@@ -84,7 +84,7 @@ df_filtered = df[mask]
 
 # 5. Cuerpo Principal
 st.title("📊 Mawahib: Monitoring & Analytics Dashboard")
-st.subheader("Control de avance educativo - Micro, Pequeños y Medianos Empresarios")
+st.subheader("User lesson progress dashboard")
 
 # KPIs corregidos
 col1, col2, col3, col4 = st.columns(4)
@@ -98,7 +98,7 @@ st.divider()
 # Gráficos e indicadores visuales
 c1, c2 = st.columns([3, 2])
 with c1:
-    st.subheader("📈 Tendencia de Usuarios")
+    st.subheader("📈 User Trends")
     df_trend = df_filtered.groupby('registration date')[['Registered', 'Active']].sum().reset_index()
     fig_trend = px.line(df_trend, x='registration date', y=['Registered', 'Active'],
                         color_discrete_sequence=["#007bff", "#545454"],
@@ -106,7 +106,7 @@ with c1:
     st.plotly_chart(fig_trend, use_container_width=True)
 
 with c2:
-    st.subheader("📍 Ubicación de Tenderos")
+    st.subheader("📍 User location")
     map_data = df_filtered[['Latitud', 'Longitud']].dropna().rename(columns={'Latitud': 'lat', 'Longitud': 'lon'})
     st.map(map_data)
 
@@ -123,7 +123,7 @@ with c3:
     st.plotly_chart(fig_biz, use_container_width=True)
 
 with c4:
-    st.subheader("🎓 Avance por Nivel Educativo")
+    st.subheader("🎓 Educational Level")
     edu_data = df_filtered.groupby('Education')['Number of lessons'].sum().reset_index().sort_values('Number of lessons', ascending=False)
     fig_edu = px.bar(edu_data, x='Number of lessons', y='Education', 
                      orientation='h', color_discrete_sequence=['#545454'],
