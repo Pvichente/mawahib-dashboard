@@ -130,5 +130,5 @@ with c4:
                      template="plotly_white")
     st.plotly_chart(fig_edu, use_container_width=True)
 
-with st.expander("📋 Ver tabla de datos completa"):
+with st.expander("📋 See full data table"):
     st.dataframe(df_filtered.drop(columns=['Latitud', 'Longitud'], errors='ignore'), use_container_width=True)
