@@ -4,6 +4,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red.svg)
 ![Status](https://img.shields.io/badge/Status-MVP-green.svg
 
+---
 ## Overview 📝
 **Mawahib** is a strategic collaboration between **Fundes** and **Coca-Cola** designed to empower Micro, Small, and Medium Enterprises (MSMEs), specifically grocery store owners. Through the **Enably** platform, users access specialized training modules in:
 * Inventory Planning
