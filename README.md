@@ -9,10 +9,10 @@
 This dashboard provides stakeholders with real-time visibility into user engagement, lesson completion rates, and key performance indicators (KPIs) to support data-driven decision-making.
 
 ## Key Features
-- [cite_start]**Strategic KPIs:** Monitor total registered users, active participation, and graduation rates[cite: 3, 4, 6].
-- [cite_start]**Learning Funnel:** Visualize the conversion from pre-loaded users to certified graduates[cite: 41].
-- [cite_start]**Geographic Analysis:** Heatmap of user locations to identify regional impact[cite: 40].
-- [cite_start]**Business Segmentation:** Insights into user demographics, education levels, and business types[cite: 33, 45, 46].
+- [cite_start] **Strategic KPIs:** Monitor total registered users, active participation, and graduation rates[cite: 3, 4, 6].
+- [cite_start] **Learning Funnel:** Visualize the conversion from pre-loaded users to certified graduates[cite: 41].
+- [cite_start] **Geographic Analysis:** Heatmap of user locations to identify regional impact[cite: 40].
+- [cite_start] **Business Segmentation:** Insights into user demographics, education levels, and business types[cite: 33, 45, 46].
 
 ## Tech Stack
 - **Language:** Python
